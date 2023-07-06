@@ -4,9 +4,8 @@
 
 package com.mycompany.conversordemonedas;
 
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
-
+import com.mycompany.conversordemonedas.logic.Conversor;
 
 /**
  *
@@ -80,62 +79,24 @@ public class ConversorDeMonedas {
         return opcionDeMoneda;
     }
     
-    public static void conversor(String opcionDeConversion, double cantidadAConvertir){               
+    public static void conversor(String opcionDeConversion, double cantidadAConvertir){ 
+        String resultado = ""; 
         switch (opcionDeConversion) {
-            case "De Pesos a Dólar" -> conversorPesoADolar(cantidadAConvertir);                                                        
-            case "De Dolar a Peso" -> conversorDolarAPeso(cantidadAConvertir);            
-            case "De Peso a Euro" -> conversorPesoAEuro(cantidadAConvertir);
-            case "De Euro a Peso" -> conversorEuroAPeso(cantidadAConvertir);
+            case "De Pesos a Dólar" -> resultado = Conversor.convertirPesoADolar(cantidadAConvertir);                                                        
+            case "De Dolar a Peso" -> resultado = Conversor.convertirDolarAPeso(cantidadAConvertir);
+            case "De Peso a Euro" -> resultado = Conversor.convertirPesoAEuro(cantidadAConvertir);
+            case "De Euro a Peso" -> resultado = Conversor.convertirEuroAPeso(cantidadAConvertir);            
             default -> errorMessage();                
-        }        
+        }   
+        
+        JOptionPane.showMessageDialog(null, resultado);
     }
     
     public static void errorMessage(){       
        JOptionPane.showMessageDialog(null,"Error: No se seleccionó ninguna opción");        
     }
     
-    /**
-     * Title: convertor de Peso a dollar
-     * @param cantidadAConvertir
-     */
-    public static void conversorPesoADolar(double cantidadAConvertir){
-        double precioActualDolar = 4181.50;
-        DecimalFormat formato = new DecimalFormat("#.##");        
-        double conversion = cantidadAConvertir  / precioActualDolar;                        
-        JOptionPane.showMessageDialog(null, formato.format(conversion));        
-    }
-     /**
-     * Title: convertor de dollar a Peso 
-     * @param cantidadAConvertir
-     */
-    public static void conversorDolarAPeso(double cantidadAConvertir){
-        double precioActualDolar = 4181.50;
-        DecimalFormat formato = new DecimalFormat("#.##");        
-        double conversion = cantidadAConvertir  * precioActualDolar;                        
-        JOptionPane.showMessageDialog(null, formato.format(conversion));        
-    }
-       /**
-     * Title: convertor de Peso a Euro
-     * @param cantidadAConvertir
-     */
-    public static void conversorPesoAEuro(double cantidadAConvertir){
-        DecimalFormat formato = new DecimalFormat("#.##"); 
-        double precioActualDolar = 4553.01;
-        
-        double conversion = cantidadAConvertir  / precioActualDolar;  
-        JOptionPane.showMessageDialog(null, formato.format(conversion));  
-    }
-    /**
-     * Title: convertor de Euro a Peso 
-     * @param cantidadAConvertir
-     */
-    public static void conversorEuroAPeso(double cantidadAConvertir){
-        DecimalFormat formato = new DecimalFormat("#.##"); 
-        double precioActualDolar = 4553.01;
-        
-        double conversion = cantidadAConvertir  * precioActualDolar;  
-        JOptionPane.showMessageDialog(null, formato.format(conversion));  
-    }
+   
     
 }
 
